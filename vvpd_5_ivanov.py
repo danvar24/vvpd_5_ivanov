@@ -67,3 +67,42 @@ def hyperbolic_cosine(x, terms=50):
     return result
 
 
+def get_input(prompt, validation_func):
+    """Получает ввод от пользователя с валидацией."""
+    while True:
+        try:
+            value = float(input(prompt))
+            if validation_func(value):
+                return value
+            else:
+                print("Введено некорректное значение. Попробуйте ещё раз.")
+        except ValueError:
+            print("Ошибка: введите числовое значение.")
+
+
+def main():
+    while True:
+        print("\nМеню функций:")
+        print("1. e^x (Экспоненциальная функция)")
+        print("2. ch(x) (Гиперболический косинус)")
+        print("3. ln(1-x) (Натуральный логарифм)")
+        print("4. Выход")
+        choice = input("Выберите функцию (1-4): ")
+        if choice == '1':
+            x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): ", lambda v: True)
+            print(f"Результат e^{x} = {exponential_function(x)}")
+        elif choice == '2':
+            x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): ", lambda v: True)
+            print(f"Результат ch({x}) = {hyperbolic_cosine(x)}")
+        elif choice == '4':
+            print("Выход из программы. До свидания!")
+            break
+        else:
+            print("Некорректный выбор. Попробуйте снова.")
+
+
+if __name__ == "__main__":
+    main()
+
+
+
