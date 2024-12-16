@@ -22,9 +22,9 @@ def exponential_function(x, terms=50):
         - `ValueError`: если terms <= 0.
 
     Пример использования:
-        >>> exponential_function(2)
+        --> exponential_function(2)
         7.389056098930649
-        >>> exponential_function(-1)
+        --> exponential_function(-1)
         0.36787944117144233
     """
 
@@ -56,9 +56,9 @@ def hyperbolic_cosine(x, terms=50):
         - `ValueError`: если terms <= 0.
 
     Пример использования:
-        >>> hyperbolic_cosine(2)
+        --> hyperbolic_cosine(2)
         3.7621956910836314
-        >>> hyperbolic_cosine(0)
+        --> hyperbolic_cosine(0)
         1.0
     """
     result = 0
@@ -80,6 +80,43 @@ def get_input(prompt, validation_func):
             print("Ошибка: введите числовое значение.")
 
 
+def natural_logarithm(x, terms=50):
+    """
+    Краткое описание:
+        Вычисляет натуральный логарифм ln(1-x) с использованием ряда Тейлора.
+
+    Подробное описание:
+        Разложение натурального логарифма имеет вид:
+            ln(1-x) = -x - x^2/2 - x^3/3 - x^4/4 - ... - x^n/n
+        Функция корректно работает только для -1 < x <= 1.
+
+    Аргументы:
+        x (float): Значение аргумента, для которого нужно вычислить ln(1-x).
+        terms (int, optional): Количество членов ряда. По умолчанию 50.
+
+    Возвращаемое значение:
+        float: Приближённое значение ln(1-x).
+
+    Исключения:
+        - `ValueError`: если x <= -1 или x > 1.
+        - `ValueError`: если terms <= 0.
+
+    Пример использования:
+        >>> natural_logarithm(0.5)
+        -0.6931471805599453
+        >>> natural_logarithm(-0.5)
+        -0.4054651081081644
+    """
+
+    if not (-1 < x <= 1):
+        raise ValueError("Значение x должно быть в диапазоне (-1, 1].")
+    result = 0
+    for n in range(1, terms + 1):
+        result -= (x ** n) / n
+    return result
+
+
+
 def main():
     while True:
         print("\nМеню функций:")
@@ -94,6 +131,9 @@ def main():
         elif choice == '2':
             x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): ", lambda v: True)
             print(f"Результат ch({x}) = {hyperbolic_cosine(x)}")
+        elif choice == '3':
+            x = get_input("Введите x (допустимый диапазон: -1 < x <= 1): ", lambda v: -1 < v <= 1)
+            print(f"Результат ln(1-{x}) = {natural_logarithm(x)}")
         elif choice == '4':
             print("Выход из программы. До свидания!")
             break
