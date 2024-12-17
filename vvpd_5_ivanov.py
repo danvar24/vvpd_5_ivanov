@@ -126,14 +126,12 @@ def main():
         print("4. Выход")
         choice = input("Выберите функцию (1-4): ")
         if choice == '1':
-            x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): ", lambda v: True)
+            x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): "
+                          , lambda v: True)
             print(f"Результат e^{x} = {exponential_function(x)}")
         elif choice == '2':
             x = get_input("Введите x (допустимый диапазон: от -бесконечности до +бесконечности): ", lambda v: True)
             print(f"Результат ch({x}) = {hyperbolic_cosine(x)}")
-        elif choice == '3':
-            x = get_input("Введите x (допустимый диапазон: -1 < x <= 1): ", lambda v: -1 < v <= 1)
-            print(f"Результат ln(1-{x}) = {natural_logarithm(x)}")
         elif choice == '4':
             print("Выход из программы. До свидания!")
             break
